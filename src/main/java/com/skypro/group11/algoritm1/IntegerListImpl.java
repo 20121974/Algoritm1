@@ -3,15 +3,15 @@ package com.skypro.group11.algoritm1;
 import javax.swing.*;
 import java.util.Arrays;
 
-public class StringListImpl implements StringList {
+public class IntegerListImpl implements IntegerList {
     private final Spring[] storage;
     private int size;
 
-    public StringListImpl() {
+    public IntegerListImpl() {
         storage = new Spring[10];
     }
 
-    public StringListImpl(int initSize) {
+    public IntegerListImpl(int initSize) {
         storage = new Spring[initSize];
     }
 
@@ -72,8 +72,10 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public boolean contains(Spring item) {
-        return indexOf(item) != -1;
+    public boolean contains(Integer item) {
+        Integer[] storageCopy = toArray();
+        sort(storageCopy);
+        return binarySearch(storageCopy, item);
     }
 
     @Override
@@ -87,7 +89,7 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public int lastIndexOf(String item) {
+    public int lastIndexOf(Integer item) {
         for (int i = size - 1; i >= 0; i--) {
                 if (storage[i].equals(item)) {
                     return i;
@@ -103,7 +105,7 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public boolean equals(StringList otherList) {
+    public boolean equals(IntegerList otherList) {
         return Arrays.equals(toArray(), otherList.toArray());
     }
 
@@ -123,7 +125,7 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public Spring[] toArray() {
+    public Integer[] toArray() {
         return Arrays.copyOf(storage, size);
     }
 
@@ -143,5 +145,36 @@ public class StringListImpl implements StringList {
         if (index < 0 || index > size) {
             throw new InvalidIndexException();
         }
+    }
+
+    public void sort(Integer[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int temp = arr[i];
+            int j = i;
+            while (j > 0 && arr[j - 1] >= temp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = temp;
+        }
+    }
+    public boolean binarySearch(Integer[] arr, int item) {
+        int min = 0;
+        int max = arr.length - 1;
+
+        while (min <= max) {
+            int mid = (min + max) / 2;
+
+            if (item == arr[mid]) {
+                return true;
+            }
+
+            if (item < arr[mid]) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+        return false;
     }
 }
