@@ -2,7 +2,7 @@ package com.skypro.group11.algoritm1;
 
 import javax.swing.*;
 
-public interface StringList {
+public interface IntegerList {
     // Добавление элемента.
     // Вернуть добавленный элемент
     // в качестве результата выполнения.
@@ -40,7 +40,7 @@ public interface StringList {
 
     // Проверка на существование элемента.
     // Вернуть true/false;
-    boolean contains(Spring item);
+    boolean contains(Integer item);
 
     // Поиск элемента.
     // Вернуть индекс элемента
@@ -50,7 +50,7 @@ public interface StringList {
     // Поиск элемента с конца.
     // Вернуть индекс элемента
     // или -1 в случае отсутствия.
-    int lastIndexOf(String item);
+    int lastIndexOf(Integer item);
 
     // Получить элемент по индексу.
     // Вернуть элемент или исключение,
@@ -61,7 +61,7 @@ public interface StringList {
     // Сравнить текущий список с другим.
     // Вернуть true/false или исключение,
     // если передан null.
-    boolean equals(StringList otherList);
+    boolean equals(IntegerList otherList);
 
     // Вернуть фактическое количество элементов.
     int size();
@@ -77,5 +77,5 @@ public interface StringList {
     // Создать новый массив
     // из строк в списке
     // и вернуть его.
-    Spring[] toArray();
+    Integer[] toArray();
 }
